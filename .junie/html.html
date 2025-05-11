@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        :root {
+            --color-primary: rgb(0, 123, 255);
+            --color-success: rgb(40, 167, 69);
+            --color-danger: #f5455c;
+            --color-text-dark: #1f2329;
+            --color-recording: rgb(255, 0, 0);
+            --font-size-small: 12px;
+            --font-size-medium: 16px;
+            --scale-button: 1.2;
+            --transition-duration: 0.2s;
+        }
+
+        .va-recording-panel {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: sans-serif;
+        }
+
+        .va-recording-panel .icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            font-size: var(--font-size-medium);
+            transition: transform var(--transition-duration);
+            transform: scale(var(--scale-button));
+        }
+
+        .va-recording-panel .icon.globe {
+            color: var(--color-primary);
+        }
+
+        .va-recording-panel .icon.cancel {
+            color: var(--color-danger);
+        }
+
+        .va-recording-panel .icon.confirm {
+            color: var(--color-success);
+        }
+    </style>
+</head>
+<body>
+<div class="recording-panel">
+    <button type="button" data-title="Speech to text" data-tooltip="Speech to text">
+        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"
+                  fill="#007BFFFF"></path>
+            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"
+                  fill="#007BFFFF"></path>
+        </svg>
+    </button>
+    <button type="button" data-title="Translate text" data-tooltip="Translate text">🌐</button>
+    <button class="icon cancel" data-title="Cancel recording" data-tooltip="Cancel recording">✖</button>
+    <div class="recording-indicator">🔴</div>
+    <div class="timer">15:12</div>
+    <button class="icon confirm" data-title="Confirm recording" data-tooltip="Confirm recording">✓</button>
+</div>
+</body>
+</html>
