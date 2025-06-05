@@ -96,8 +96,14 @@ function stopRecording() {
                         body: formData
                     });
                     const data = await response.json();
-                    const text = data.text;
-                    if (targetElement) targetElement.value += text;
+                      const text = data.text;
+                      if (targetElement) {
+                          if (targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA') {
+                              targetElement.value += text;
+                          } else if (targetElement.isContentEditable) {
+                              targetElement.innerText += text;
+                          }
+                      }
                 } catch (err) {
                     console.error('Transcription error:', err);
                     alert('Audio transcription error.');
@@ -121,7 +127,9 @@ function createTranslateButton() {
     btn.onmouseleave = () => btn.style.transform = 'scale(1.0)';
     btn.onclick = () => {
         if (!targetElement) return;
-        const text = targetElement.value.trim();
+        const text = targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA'
+            ? targetElement.value.trim()
+            : targetElement.innerText.trim();
         if (!text) return;
         btn.disabled = true;
         const isRussian = /[\u0400-\u04FF]/.test(text);
@@ -145,8 +153,14 @@ function createTranslateButton() {
                     body: JSON.stringify({model: 'gpt-4o-mini', messages: [{role: 'user', content: prompt}]}),
                 });
                 const data = await resApi.json();
-                const translated = data.choices?.[0]?.message?.content.trim();
-                if (translated) targetElement.value = translated;
+                  const translated = data.choices?.[0]?.message?.content.trim();
+                  if (translated) {
+                      if (targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA') {
+                          targetElement.value = translated;
+                      } else if (targetElement.isContentEditable) {
+                          targetElement.innerText = translated;
+                      }
+                  }
             } catch (err) {
                 console.error('Translation error:', err);
                 alert('The error of translating the text.');
