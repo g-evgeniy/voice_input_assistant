@@ -39,6 +39,10 @@ A Chrome extension that adds speech-to-text and Russian-English translation capa
     - Whisper API (for speech recognition)
     - GPT models (for translation)
 
+## Testing
+
+Run `npm test` to execute the Jest test suite.
+
 ## Privacy
 
 This extension:
