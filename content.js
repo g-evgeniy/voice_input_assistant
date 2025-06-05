@@ -197,13 +197,19 @@ function onFocusIn(e) {
     else removeButtons();
 }
 
-document.addEventListener('focusin', onFocusIn);
+if (typeof document !== 'undefined') {
+    document.addEventListener('focusin', onFocusIn);
 
-document.addEventListener('click', (e) => {
-    if (targetElement &&
-        !targetElement.contains(e.target) &&
-        micButton && !micButton.contains(e.target) &&
-        translateButton && !translateButton.contains(e.target)) {
-        removeButtons();
-    }
-});
+    document.addEventListener('click', (e) => {
+        if (targetElement &&
+            !targetElement.contains(e.target) &&
+            micButton && !micButton.contains(e.target) &&
+            translateButton && !translateButton.contains(e.target)) {
+            removeButtons();
+        }
+    });
+}
+
+if (typeof module !== 'undefined') {
+    module.exports = { isSupported };
+}
